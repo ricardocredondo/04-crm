@@ -1,28 +1,28 @@
 {
   "clientes": [
     {
-      "nombre": "ricardo",
-      "empresa": "nadia",
-      "email": "nadia@nadia.es",
-      "telefono": "123456789",
-      "notas": "hola que tal",
-      "id": 1
-    },
-    {
-      "nombre": "agapito",
-      "empresa": "agapito Design",
-      "email": "agapito@agapito.es",
-      "telefono": "456789123",
-      "notas": "Agapito es diseñador",
-      "id": 2
-    },
-    {
-      "nombre": "carmen",
+      "nombre": "carmen2",
       "empresa": "carmen enterprise",
       "email": "carmen@carmen.es",
       "telefono": "456951",
       "notas": "Carmen es presentadora",
       "id": 3
+    },
+    {
+      "nombre": "luisa",
+      "empresa": "design Enterprise",
+      "email": "luisa@luisa.com",
+      "telefono": "159753",
+      "notas": "hola que tal luisa",
+      "id": 4
+    },
+    {
+      "nombre": "margarita 23",
+      "empresa": "josua",
+      "email": "josua@josua.es",
+      "telefono": "159789",
+      "notas": "hola que tal",
+      "id": 5
     }
   ]
 }

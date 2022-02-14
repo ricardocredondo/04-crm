@@ -2,13 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 import Alerta from './Alerta';
-const Formulario = () => {
+const Formulario = ({ clienteTemporal, setClienteTemporal }) => {
   const navigate = useNavigate();
+  // const { nombre, empresa, telefono, email, notas } = clienteTemporal;
   const nuevoClienteSchema = yup.object().shape({
     nombre: yup
       .string()
       .min(3, 'El nombre es demasiado corto')
-      .max(10, 'El nombre es muy largo')
+      .max(20, 'El nombre es muy largo')
       .required('El nombre del cliente es obligatorio'),
     empresa: yup
       .string()
@@ -27,15 +28,26 @@ const Formulario = () => {
   });
   const handleSubmit = async (values) => {
     try {
-      const url = 'http://localhost:4000/clientes';
-      const respuesta = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(values),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const resultado = await respuesta.json();
+      if (clienteTemporal.id) {
+        const urlPut = `http://localhost:4000/clientes/${clienteTemporal.id}`;
+        await fetch(urlPut, {
+          method: 'PUT',
+          body: JSON.stringify(values),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setClienteTemporal({});
+      } else {
+        const url = 'http://localhost:4000/clientes';
+        await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(values),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      }
       navigate('/clientes');
     } catch (error) {
       console.log(error);
@@ -44,16 +56,17 @@ const Formulario = () => {
   return (
     <div className="md:w-3/4 mt-8 p-10 bg-white rounded-md shadow-md mx-auto">
       <h1 className="text-gray-600 font-bold text-2xl text-center  uppercase">
-        Agregar cliente
+        {clienteTemporal?.nombre ? 'Editar Cliente' : 'Agregar Cliente'}
       </h1>
       <Formik
         initialValues={{
-          nombre: '',
-          empresa: '',
-          email: '',
-          telefono: '',
-          notas: '',
+          nombre: clienteTemporal?.nombre ?? '',
+          empresa: clienteTemporal?.empresa ?? '',
+          email: clienteTemporal?.email ?? '',
+          telefono: clienteTemporal?.telefono ?? '',
+          notas: clienteTemporal?.notas ?? '',
         }}
+        enableReinitialize={true}
         onSubmit={async (values, { resetForm }) => {
           await handleSubmit(values);
           resetForm();
@@ -135,7 +148,11 @@ const Formulario = () => {
               </div>
               <input
                 type="submit"
-                value="Guardar Cliente"
+                value={
+                  clienteTemporal?.nombre
+                    ? 'Guardar Cambios'
+                    : 'Agregar Cliente'
+                }
                 className="w-full p-3 text-lg text-white font-bold uppercase bg-blue-800 cursor-pointer"
               />
             </Form>
@@ -145,5 +162,8 @@ const Formulario = () => {
     </div>
   );
 };
-
+Formulario.defaultProps = {
+  clienteTemporal: {},
+  cargando: false,
+};
 export default Formulario;

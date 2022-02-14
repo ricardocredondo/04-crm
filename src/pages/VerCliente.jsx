@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import SinClientes from '../components/SinClientes';
 import Spinner from '../components/Spinner';
-const VerCliente = () => {
+const VerCliente = ({ cargando, setCargando }) => {
   const [cliente, setCliente] = useState({});
-  const [cargando, setCargando] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     setCargando(!cargando);
@@ -25,8 +25,10 @@ const VerCliente = () => {
     <div>
       {cargando ? (
         <Spinner />
+      ) : Object.keys(cliente).length === 0 ? (
+        <SinClientes />
       ) : (
-        <table className="w-full mt-5 table-auto shadow bg-white">
+        <table className="w-full mt-10 table-auto shadow bg-white">
           <thead className="bg-blue-800 text-white">
             <tr>
               <th className="p-2">Nombre</th>
