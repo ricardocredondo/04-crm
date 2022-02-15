@@ -1,20 +1,12 @@
 {
   "clientes": [
     {
-      "nombre": "carmen2",
+      "nombre": "carmen56",
       "empresa": "carmen enterprise",
       "email": "carmen@carmen.es",
       "telefono": "456951",
       "notas": "Carmen es presentadora",
       "id": 3
-    },
-    {
-      "nombre": "luisa",
-      "empresa": "design Enterprise",
-      "email": "luisa@luisa.com",
-      "telefono": "159753",
-      "notas": "hola que tal luisa",
-      "id": 4
     },
     {
       "nombre": "margarita 23",

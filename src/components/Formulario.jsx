@@ -29,7 +29,7 @@ const Formulario = ({ clienteTemporal, setClienteTemporal }) => {
   const handleSubmit = async (values) => {
     try {
       if (clienteTemporal.id) {
-        const urlPut = `http://localhost:4000/clientes/${clienteTemporal.id}`;
+        const urlPut = `${import.meta.env.VITE_API_URL}/${clienteTemporal.id}`;
         await fetch(urlPut, {
           method: 'PUT',
           body: JSON.stringify(values),
@@ -39,7 +39,7 @@ const Formulario = ({ clienteTemporal, setClienteTemporal }) => {
         });
         setClienteTemporal({});
       } else {
-        const url = 'http://localhost:4000/clientes';
+        const url = import.meta.env.VITE_API_URL;
         await fetch(url, {
           method: 'POST',
           body: JSON.stringify(values),
